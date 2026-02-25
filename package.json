@@ -1,0 +1,114 @@
+{
+  "name": "faaaa-sound",
+  "displayName": "Faaaa Sound",
+  "description": "Play a dramatic Faaaaaaah when tests fail or errors appear.",
+  "version": "0.0.3",
+  "publisher": "morshedulmunna",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/morshedulmunna/faaaa_sound.git"
+  },
+  "homepage": "https://github.com/morshedulmunna/faaaa_sound#readme",
+  "bugs": {
+    "url": "https://github.com/morshedulmunna/faaaa_sound/issues"
+  },
+  "keywords": [
+    "sound",
+    "audio",
+    "testing",
+    "error",
+    "notification",
+    "fun"
+  ],
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Testing"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "files": [
+    "out/**",
+    "src/**",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "package.json",
+    "faaah.mp3"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "faaaaSound.playNow",
+        "title": "Faaaa Sound: Play Now"
+      },
+      {
+        "command": "faaaaSound.selfTest",
+        "title": "Faaaa Sound: Self Test"
+      },
+      {
+        "command": "faaaaSound.showLogs",
+        "title": "Faaaa Sound: Show Logs"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Faaaa Sound",
+      "properties": {
+        "faaaaSound.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable all Faaaa Sound notifications."
+        },
+        "faaaaSound.onTestFailure": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play when a test run reports failing tests."
+        },
+        "faaaaSound.onErrors": {
+          "type": "boolean",
+          "default": false,
+          "description": "Play when new diagnostics with Error severity are detected."
+        },
+        "faaaaSound.readErrorMessage": {
+          "type": "boolean",
+          "default": false,
+          "description": "Read the latest error message before the final Faaaaaaah."
+        },
+        "faaaaSound.soundFilePath": {
+          "type": "string",
+          "default": "${extensionPath}/faaah.mp3",
+          "description": "Path to audio file to play. Supports ${extensionPath} and ${workspaceFolder}."
+        },
+        "faaaaSound.cooldownMs": {
+          "type": "number",
+          "default": 2500,
+          "minimum": 0,
+          "description": "Minimum delay between repeated sounds, in milliseconds."
+        },
+        "faaaaSound.customPhrase": {
+          "type": "string",
+          "default": "Faaaaaaah",
+          "description": "Phrase spoken only if audio file playback fails."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "node --test test/error.test.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.7.1",
+    "typescript": "^5.5.4"
+  }
+}
